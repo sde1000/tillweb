@@ -1,0 +1,43 @@
+[project]
+name = "tillweb"
+version = "0.2.0"
+description = ""
+authors = [
+    {name = "Stephen Early", email = "steve@assorted.org.uk"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4"
+dependencies = [
+    "django (>=6.0.1,<7.0.0)",
+    "django4-bootstrap-breadcrumbs (>=0.10)",
+    "django-widget-tweaks (>=1.4)",
+    "psycopg2 (>=2.9,<3.0)",
+    "mozilla-django-oidc",
+    "quicktill[tillweb]",  # for production
+    # "quicktill[tillweb] @ file:///home/steve/quicktill",  # for development
+]
+
+[tool.poetry]
+include = [
+    "tillweb/static/bundles/**/*",
+]
+exclude = [
+    "**/*~",
+    "tillweb/db.sqlite3",
+]
+
+[tool.poetry.scripts]
+tillweb = "tillweb.manage:main"
+
+[[tool.poetry.source]]
+name = "quicktill"
+url = "https://quicktill.assorted.org.uk/software/pip/"
+priority = "supplemental"
+
+# for quicktill development
+# [tool.poetry.dependencies]
+# quicktill = {develop = true}
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

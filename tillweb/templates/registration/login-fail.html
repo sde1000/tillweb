@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Login failure{% endblock %}
+{% block nav %}
+<nav>
+  <div class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="/">{{ TILLWEB_PUBNAME }}</a>
+  </div>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="container text-center mt-5">
+  <div class="row">
+    <div class="col">
+      <h1 class="mb-4">Login failed</h1>
+      {% if OIDC_ENABLED %}
+      <p>You are unable to log in to this till because you are not a
+	member of the required groups.</p>
+      <p>Please contact the {{OIDC_PROVIDER_NAME}} administrator to
+	fix this problem.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Staff login{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+  {% if OIDC_ENABLED %}
+  <div class="row mb-4">
+    <div class="col">
+      <a href="{% url 'oidc_authentication_init' %}{% if next %}?next={{next|escape}}{% endif %}" class="btn btn-primary btn-lg">Sign in with {{OIDC_PROVIDER_NAME}}</a>
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col">
+      <form method="post" action="{% url "login-page" %}">
+	{% csrf_token %}
+	{% if not OIDC_ENABLED %}
+	<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+	{% else %}
+	<h1 class="h4 mb-3 font-weight-normal">or log in with username and password:</h1>
+	{% endif %}
+	{% if form.errors %}
+	<div class="alert alert-danger">
+	  <p>{{form.non_field_errors}}</p>
+	</div>
+	{% endif %}
+	{% if user.is_authenticated %}
+	<div class="alert alert-warning">
+	  <strong>Note:</strong> You are already logged in as {{user.get_full_name}}.
+	</div>
+	{% endif %}
+	<div class="form-group">
+	  {{form.username.errors}}
+	  <label for="{{form.username.id_for_label}}">Username:</label>
+	  {{form.username}}
+	</div>
+	<div class="form-group">
+	  {{form.password.errors}}
+	  <label for="{{form.password.id_for_label}}">Password:</label>
+	  {{form.password}}
+	</div>
+	<button class="btn btn-primary btn-lg" type="submit">Sign in</button>
+	<input type="hidden" name="next" value="{{ next|escape }}">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

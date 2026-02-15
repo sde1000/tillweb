@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Till user profile{% endblock %}
+
+{% block content %}
+<nav class="container">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url "tillweb-pubroot" %}">{{TILLWEB_PUBNAME}} till front page</a>
+    </li>
+  {% if may_edit_users %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url "userlist" %}">Add or remove users</a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+
+{% endblock %}
