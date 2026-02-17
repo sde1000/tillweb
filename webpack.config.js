@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -12,6 +13,13 @@ module.exports = {
     },
     plugins: [
 	new MiniCssExtractPlugin(),
+	new webpack.ProvidePlugin({
+	    $: "jquery",
+	    jQuery: "jquery",
+	    jquery: "jquery",
+	    'window.jQuery': "jquery",
+	    'window.$': "jquery",
+	}),
     ],
     resolve: {
 	alias: {
@@ -28,6 +36,11 @@ module.exports = {
 		    "css-loader"],
 	    },
 	],
+    },
+    // AMD must be disabled for datatables to work
+    amd: {
+	"datatables.net": false,
+	"datatables.net-bs4": false,
     },
     performance: {
 	hints: false,
