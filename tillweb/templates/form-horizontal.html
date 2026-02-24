@@ -13,12 +13,12 @@
 {% endif %}
 
 {% for field in form.visible_fields %}
-  <div class="form-group row align-items-center">
+  <div class="row mb-3 align-items-center">
     <label for="{{ field.id_for_label }}" class="col-sm-4 col-md-3 col-lg-2 col-form-label">{{ field.label }}</label>
     <div class="col-sm-8 col-md-9 col-lg-10">
       {% include "form-field.html" %}
       {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
+      <div class="form-text">{{ field.help_text }}</div>
       {% endif %}
     </div>
   </div>

@@ -2,28 +2,29 @@
 // action to put it there.
 
 // jquery
-require("expose-loader?exposes=$,jQuery!jquery");
+import jQuery from 'jquery';
+window.jQuery = jQuery;
+window.$ = jQuery;
 
 // bootstrap
-require('bootstrap/dist/css/bootstrap.min.css');
-require('bootstrap');
-//import * as bootstrap from 'bootstrap';
+import './styles.scss';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 // select2
-require('select2/dist/css/select2.css');
-require('@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css');
-require('select2');
+import 'select2/dist/css/select2.css';
+import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css';
+import 'select2';
+$.fn.select2.defaults.set("theme", "bootstrap-5");
 
 // datatables
-require('datatables.net-bs4/css/dataTables.bootstrap4.css');
-require('datatables.net-bs4');
-
-// We need to do this to get DataTable into the global scope, because
-// the quicktill templates rely on it
-window.DataTable = $.fn.DataTable;
+import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
+import DataTable from 'datatables.net-bs5';
+DataTable.use(bootstrap);
+window.DataTable = DataTable;
 
 // tablesorter
-require('tablesorter');
+import 'tablesorter';
 
 // Chart.js
 import Chart from 'chart.js/auto';

@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -13,20 +13,7 @@ module.exports = {
     },
     plugins: [
 	new MiniCssExtractPlugin(),
-	new webpack.ProvidePlugin({
-	    $: "jquery",
-	    jQuery: "jquery",
-	    jquery: "jquery",
-	    'window.jQuery': "jquery",
-	    'window.$': "jquery",
-	}),
     ],
-    resolve: {
-	alias: {
-	    // Force all modules to use the same jquery version
-	    'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery'),
-	},
-    },
     module: {
 	rules: [
 	    {
@@ -35,12 +22,50 @@ module.exports = {
 		    MiniCssExtractPlugin.loader,
 		    "css-loader"],
 	    },
+	    {
+		test: /\.(scss)$/,
+		use: [
+		    MiniCssExtractPlugin.loader,
+		    {
+			// Interprets `@import` and `url()` like
+			// `import/require()` and will resolve them
+			loader: 'css-loader'
+		    },
+		    {
+			// Loader for webpack to process CSS with PostCSS
+			loader: 'postcss-loader',
+			options: {
+			    postcssOptions: {
+				plugins: [
+				    autoprefixer
+				]
+			    }
+			}
+		    },
+		    {
+			// Loads a SASS/SCSS file and compiles it to CSS
+			loader: 'sass-loader',
+			options: {
+			    sassOptions: {
+				// Silence Sass deprecation warnings. May
+				// be fixed in a later version of Bootstrap.
+				silenceDeprecations: [
+				    'if-function',
+				    'color-functions',
+				    'global-builtin',
+				    'import'
+				]
+			    }
+			}
+		    },
+		],
+	    },
 	],
     },
     // AMD must be disabled for datatables to work
     amd: {
 	"datatables.net": false,
-	"datatables.net-bs4": false,
+	"datatables.net-bs5": false,
     },
     performance: {
 	hints: false,

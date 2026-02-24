@@ -1,0 +1,9 @@
+/* Bootstrap 5 changed the default decoration for links. We use lots
+   of links in tables, where underlining looks ugly. Reset to how it
+   was in Bootstrap 4. */
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+
+@import "bootstrap/scss/bootstrap";
