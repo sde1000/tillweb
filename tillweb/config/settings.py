@@ -20,12 +20,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from django.urls import reverse
 from django.contrib.messages import constants as messages
+from quicktill import xero
 
 config = read_config()
 django_config = config['django']
 front_page_config = config['front-page']
 till_config = config['till']
 oidc_config = config['oidc']
+xero_config = config['xero']
 
 # Simple switch to disable OIDC configuration without deleting it from
 # the configuration file
@@ -230,11 +232,16 @@ FRONT_PAGE_MODE = front_page_config.get("mode", "start-button")
 
 # Configure quicktill.tillweb
 # info["reverse"] still needs the django reverse function passing
+info = {'reverse': reverse}
+
+if xero_config:
+    info['accounts'] = xero.XeroWebInfo(xero_config.get('shortcode'))
+
 TILLWEB_DATABASE = sessionmaker(
     bind=create_engine(
         f'postgresql+psycopg2:///{till_config["database_name"]}',
         pool_size=32, pool_recycle=600, future=True),
-    info={'reverse': reverse}, future=True)
+    info=info, future=True)
 TILLWEB_PUBNAME = till_config.get("site_name", "site_name not configured")
 TILLWEB_LOGIN_REQUIRED = True
 TILLWEB_DEFAULT_ACCESS = "M"
