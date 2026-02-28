@@ -1,6 +1,6 @@
 [project]
 name = "tillweb"
-version = "0.3.0"
+version = "0.4.0"
 description = ""
 authors = [
     {name = "Stephen Early", email = "steve@assorted.org.uk"}
@@ -13,7 +13,7 @@ dependencies = [
     "django-widget-tweaks (>=1.4)",
     "psycopg2 (>=2.9,<3.0)",
     "mozilla-django-oidc",
-    "quicktill[tillweb] (>=26.2)",  # for production
+    "quicktill[tillweb] (>=26.4)",  # for production
     # "quicktill[tillweb] @ file:///home/steve/quicktill",  # for development
 ]
 
