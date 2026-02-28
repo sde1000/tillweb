@@ -27,7 +27,13 @@ window.DataTable = DataTable;
 import 'tablesorter';
 
 // Chart.js
-import Chart from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
+// Only importing the parts of chart.js we use saves ~68k from the bundle
+import { Chart, PieController, ArcElement, Tooltip, Legend } from 'chart.js';
+Chart.register(PieController);
+Chart.register(ArcElement);
+Chart.register(Tooltip);
+Chart.register(Legend);
 window.Chart = Chart;
 
 import Sortable from 'sortablejs';
