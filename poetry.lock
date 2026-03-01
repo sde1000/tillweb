@@ -771,13 +771,13 @@ png = ["pypng"]
 
 [[package]]
 name = "quicktill"
-version = "26.4"
+version = "26.5"
 description = "Quick till and stock control library"
 optional = false
 python-versions = ">=3.12"
 groups = ["main"]
 files = [
-    {file = "quicktill-26.4.tar.gz", hash = "sha256:37029e6acf11c5ba67f93765fae200285a172b87db35d4539ff04823ee2fb21c"},
+    {file = "quicktill-26.5.tar.gz", hash = "sha256:8355897aa47b571628c3b7e2d29c5677ad5d5863fb298a845ddf6c9f39294b14"},
 ]
 
 [package.dependencies]
@@ -1042,4 +1042,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "2e567b32f6da5ebd4c5cfcdcf7b578e3d50fb85a7c63e8b8018e275744f67583"
+content-hash = "8f60ef9640b590c6c81c32774615854baeb87f2ccd4099f9ec234c791950dfb5"
