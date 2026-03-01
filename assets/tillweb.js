@@ -23,9 +23,6 @@ import DataTable from 'datatables.net-bs5';
 DataTable.use(bootstrap);
 window.DataTable = DataTable;
 
-// tablesorter
-import 'tablesorter';
-
 // Chart.js
 // import Chart from 'chart.js/auto';
 // Only importing the parts of chart.js we use saves ~68k from the bundle
