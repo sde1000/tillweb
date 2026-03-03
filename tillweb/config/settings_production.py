@@ -12,6 +12,17 @@ if django_config.get("mode", "production") == "production":
 
     ALLOWED_HOSTS = django_config["allowed_hosts"]
 
+    STORAGES = {
+        "default": {
+            "BACKEND":
+            "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND":
+            "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        },
+    }
+
     # Ensure that the secret key has been set and we are not falling back
     # to the default
     with open(django_config["secret_key_file"]) as f:
