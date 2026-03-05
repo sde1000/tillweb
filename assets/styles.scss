@@ -5,5 +5,42 @@
 $link-decoration: none;
 $link-hover-decoration: underline;
 
-
 @import "bootstrap/scss/bootstrap";
+
+/* Select2 Bootstrap 5 theme */
+$s2bs5-border-color: $border-color;
+@import "select2/src/scss/core.scss";
+@import "select2-bootstrap-5-theme/src/include-all";
+
+/* Bugfix for select2 with Bootstrap 5.3 — extend the border of the
+   select element around the select2 dropdown when the dropdown is
+   open. See
+   https://github.com/apalfrey/select2-bootstrap-5-theme/issues/55
+
+   Maybe add a transition to match the transition bootstrap5 is
+   applying to the border of the select element? The border of the
+   dropdown appears first.
+*/
+.select2-container--bootstrap-5 .select2-dropdown {
+    overflow: visible;
+
+  &:before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: $s2bs5-focus-width;
+    bottom: calc(($s2bs5-focus-width + $s2bs5-border-width) * -1);
+    left: calc(($s2bs5-focus-width + $s2bs5-border-width) * -1);
+    right: calc(($s2bs5-focus-width + $s2bs5-border-width) * -1);
+    border: $s2bs5-focus-width solid $input-btn-focus-color;
+    border-radius: calc($s2bs5-border-radius + ($s2bs5-border-width * 4));
+    border-top: 0 solid transparent;
+    @include border-top-radius(0);
+  }
+
+  > .select2-results {
+    overflow: hidden;
+    @include border-radius($s2bs5-border-radius);
+    @include border-top-radius(0);
+  }
+}

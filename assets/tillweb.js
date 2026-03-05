@@ -12,8 +12,9 @@ import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 
 // select2
-import 'select2/dist/css/select2.css';
-import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css';
+// Bootstrap theme style is now imported from styles.scss
+//import 'select2/dist/css/select2.css';
+//import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css';
 import 'select2';
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 
