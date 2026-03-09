@@ -1,6 +1,6 @@
 [project]
 name = "tillweb"
-version = "0.6.0"
+version = "0.7.0"
 description = ""
 authors = [
     {name = "Stephen Early", email = "steve@assorted.org.uk"}
