@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap_breadcrumbs',
     'widget_tweaks',
+    'tillweb.utils',
     'quicktill.tillweb',
 ]
 if oidc_config:
