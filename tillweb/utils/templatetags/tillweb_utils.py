@@ -16,7 +16,8 @@ _modal_template = """
 </div>
 </div>
 </div>
-"""
+"""  # noqa: E501
+
 
 @register.simple_block_tag
 def modal(content, id, dialog_class="",
@@ -39,3 +40,46 @@ def modal(content, id, dialog_class="",
         "content": mark_safe(content),
     }
     return format_html(_modal_template, **format_kwargs)
+
+
+_tab_template = """
+<li class="nav-item">
+<a class="{link_classes}" id="{id}Tab" href="#{id}" data-bs-toggle="tab" data-bs-target="#{id}" role="tab" aria-controls="{id}" aria-selected="{active}">{title}</a>
+</li>
+"""  # noqa: E501
+
+
+@register.simple_tag
+def tab(id, title="Tab", active=False):
+    link_classes = set()
+    link_classes.add("nav-link")
+    if active:
+        link_classes.add("active")
+    format_kwargs = {
+        "link_classes": " ".join(link_classes),
+        "id": id,
+        "title": title,
+        "active": "true" if active else "false",
+    }
+    return format_html(_tab_template, **format_kwargs)
+
+
+_tabcontent_template = """
+<div class="{pane_classes}" id="{id}" aria-labelledby="{id}Tab" tabindex="0">{content}</div>
+"""  # noqa: E501
+
+
+@register.simple_block_tag
+def tabcontent(content, id, active=False):
+    pane_classes = set()
+    pane_classes.add("tab-pane")
+    pane_classes.add("fade")
+    if active:
+        pane_classes.add("show")
+        pane_classes.add("active")
+    format_kwargs = {
+        "id": id,
+        "content": mark_safe(content),
+        "pane_classes": " ".join(pane_classes),
+    }
+    return format_html(_tabcontent_template, **format_kwargs)
